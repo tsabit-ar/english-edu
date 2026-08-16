@@ -4,12 +4,178 @@ import Link from 'next/link'
 import Chapter1Action from './Chapter1Action'
 import QuizSection from './QuizSection'
 
-const CHAPTER_METADATA: { [key: number]: { title: string; videoId: string; pdfUrl?: string } } = {
-  1: { title: 'Overview & Dasar Pembelajaran', videoId: 'dQw4w9WgXcQ' },
-  2: { title: 'Struktur Kalimat & Pola Dasar', videoId: 'dQw4w9WgXcQ', pdfUrl: '#' },
-  3: { title: 'Kosakata Kontekstual & Frasa', videoId: 'dQw4w9WgXcQ', pdfUrl: '#' },
-  4: { title: 'Listening & Analisis Percakapan', videoId: 'dQw4w9WgXcQ', pdfUrl: '#' },
-  5: { title: 'Praktek Lanjutan & Evaluasi', videoId: 'dQw4w9WgXcQ', pdfUrl: '#' },
+interface VocabularyItem {
+  word: string
+  partOfSpeech: string // n. (noun), v. (verb), adj. (adjective), dll.
+  meaning: string
+  example: string
+}
+
+// Metadata 5 BAB (Lengkap dengan Ringkasan & Kosakata Penting)
+const CHAPTER_METADATA: {
+  [key: number]: {
+    title: string
+    videoId: string
+    summary: string[]
+    vocabulary: VocabularyItem[]
+    pdfUrl?: string
+  }
+} = {
+  1: {
+    title: 'Overview & Dasar Pembelajaran',
+    videoId: 'dQw4w9WgXcQ',
+    summary: [
+      'Pengenalan ruang lingkup materi dan capaian pembelajaran.',
+      'Sistem evaluasi kuis adaptif dan syarat minimal nilai 70%.',
+      'Panduan pemanfaatan modul bacaan dan fitur gudang soal.',
+    ],
+    vocabulary: [
+      {
+        word: 'Assessment',
+        partOfSpeech: 'n.',
+        meaning: 'Penilaian / evaluasi kemampuan',
+        example: 'The final assessment determines your chapter progression.',
+      },
+      {
+        word: 'Prerequisite',
+        partOfSpeech: 'n.',
+        meaning: 'Syarat mutlak / prasyarat',
+        example: 'Passing Chapter 1 is a prerequisite for opening Chapter 2.',
+      },
+      {
+        word: 'Proficiency',
+        partOfSpeech: 'n.',
+        meaning: 'Kemahiran / kecakapan',
+        example: 'Regular practice will improve your language proficiency.',
+      },
+    ],
+  },
+  2: {
+    title: 'Struktur Kalimat & Pola Dasar',
+    videoId: 'z1P1TZ_tM0E',
+    summary: [
+      'Pola pembentukan kalimat sederhana (Subject + Verb + Object/Complement).',
+      'Aturan penyesuaian Subject-Verb Agreement dalam Present Tense.',
+      'Kesalahan umum dalam pembentukan kalimat negatif dan interogatif.',
+    ],
+    vocabulary: [
+      {
+        word: 'Clause',
+        partOfSpeech: 'n.',
+        meaning: 'Klausa (kelompok kata berpola subjek & predikat)',
+        example: 'Every complete sentence contains at least one main clause.',
+      },
+      {
+        word: 'Predicate',
+        partOfSpeech: 'n.',
+        meaning: 'Predikat (bagian kalimat yang menyatakan tindakan/kondisi)',
+        example: 'The predicate indicates what the subject does.',
+      },
+      {
+        word: 'Concord',
+        partOfSpeech: 'n.',
+        meaning: 'Kesesuaian (agreement) antara subjek dan kata kerja',
+        example: 'Ensure singular subjects maintain concord with singular verbs.',
+      },
+      {
+        word: 'Modifier',
+        partOfSpeech: 'n.',
+        meaning: 'Kata penjelas / pembatas makna',
+        example: 'Adjectives act as modifiers to give more detail to nouns.',
+      },
+    ],
+    pdfUrl: '/materials/modul-bab-2.pdf',
+  },
+  3: {
+    title: 'Kosakata Kontekstual & Frasa',
+    videoId: 'dQw4w9WgXcQ',
+    summary: [
+      'Penggunaan kosakata akademik dan profesional dalam konteks kalimat.',
+      'Perbedaan collocations umum dan idiom yang sering diujikan.',
+      'Teknik mengidentifikasi arti kata melalui petunjuk konteks (context clues).',
+    ],
+    vocabulary: [
+      {
+        word: 'Collocation',
+        partOfSpeech: 'n.',
+        meaning: 'Pasangan kata yang lazim bersanding secara alami',
+        example: 'We say "make a decision", not "do a decision".',
+      },
+      {
+        word: 'Nuance',
+        partOfSpeech: 'n.',
+        meaning: 'Nuansa / perbedaan makna yang sangat halus',
+        example: 'Pay attention to the nuance between "frugal" and "stingy".',
+      },
+      {
+        word: 'Context Clue',
+        partOfSpeech: 'n.',
+        meaning: 'Petunjuk konteks kalimat untuk menebak arti kata',
+        example: 'Use context clues in the paragraph to deduce unknown words.',
+      },
+    ],
+    pdfUrl: '/materials/modul-bab-3.pdf',
+  },
+  4: {
+    title: 'Listening & Analisis Percakapan',
+    videoId: 'dQw4w9WgXcQ',
+    summary: [
+      'Strategi mendengarkan kata kunci (key content words) dalam audio percakapan.',
+      'Membedakan aksen, linking sounds, dan intonasi pertanyaan.',
+      'Teknik mencatat poin penting secara cepat saat audio diputar.',
+    ],
+    vocabulary: [
+      {
+        word: 'Intonation',
+        partOfSpeech: 'n.',
+        meaning: 'Intonasi / naik turunnya nada bicara',
+        example: 'A rising intonation often indicates a yes/no question.',
+      },
+      {
+        word: 'Liaison',
+        partOfSpeech: 'n.',
+        meaning: 'Penyambungan bunyi akhir kata ke awal kata berikutnya',
+        example: 'Liaison makes spoken English flow continuously.',
+      },
+      {
+        word: 'Gist',
+        partOfSpeech: 'n.',
+        meaning: 'Pokok gagasan / inti keseluruhan cerita',
+        example: 'Listen for the general gist before focusing on tiny details.',
+      },
+    ],
+    pdfUrl: '/materials/modul-bab-4.pdf',
+  },
+  5: {
+    title: 'Praktek Lanjutan & Evaluasi',
+    videoId: 'dQw4w9WgXcQ',
+    summary: [
+      'Integrasi seluruh konsep struktur, kosakata, dan pemahaman listening.',
+      'Analisis pola kesalahan yang paling sering terjadi pada evaluasi akhir.',
+      'Langkah tindak lanjut pemanfaatan AI untuk latihan kuis mandiri.',
+    ],
+    vocabulary: [
+      {
+        word: 'Comprehensive',
+        partOfSpeech: 'adj.',
+        meaning: 'Menyeluruh / mencakup semua aspek',
+        example: 'This test provides a comprehensive evaluation of your skills.',
+      },
+      {
+        word: 'Fluency',
+        partOfSpeech: 'n.',
+        meaning: 'Kelancaran dan kefasihan berbahasa',
+        example: 'Consistent practice develops natural fluency over time.',
+      },
+      {
+        word: 'Synthesis',
+        partOfSpeech: 'n.',
+        meaning: 'Penggabungan berbagai elemen menjadi satu kesatuan',
+        example: 'The final project requires the synthesis of all previous chapters.',
+      },
+    ],
+    pdfUrl: '/materials/modul-bab-5.pdf',
+  },
 }
 
 export default async function ChapterPage({ params }: { params: Promise<{ id: string }> }) {
@@ -21,7 +187,9 @@ export default async function ChapterPage({ params }: { params: Promise<{ id: st
   }
 
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   if (!user) {
     redirect('/login')
@@ -57,7 +225,6 @@ export default async function ChapterPage({ params }: { params: Promise<{ id: st
   return (
     <div className="min-h-screen bg-[#0d1117] text-[#e6edf3] p-6 lg:p-10">
       <div className="max-w-4xl mx-auto space-y-6">
-        
         {/* Navigation Top */}
         <div className="flex items-center justify-between pb-4 border-b border-[#30363d]">
           <Link
@@ -78,7 +245,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ id: st
           </h1>
         </div>
 
-        {/* Video Player Container */}
+        {/* 1. Video Player */}
         <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-[#161b22] border border-[#30363d] shadow-xl">
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${currentMeta.videoId}`}
@@ -89,7 +256,59 @@ export default async function ChapterPage({ params }: { params: Promise<{ id: st
           />
         </div>
 
-        {/* Download PDF (Untuk BAB 2 - 5) */}
+        {/* 2. Ringkasan Video */}
+        <div className="p-6 rounded-2xl bg-[#161b22] border border-[#30363d] space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="text-lg">💡</span>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-[#2dd4bf]">
+              Poin Penting & Ringkasan Video
+            </h3>
+          </div>
+          <ul className="space-y-2 text-xs lg:text-sm text-[#8b949e]">
+            {currentMeta.summary.map((point, index) => (
+              <li key={index} className="flex items-start gap-2.5">
+                <span className="text-[#2dd4bf] font-bold mt-0.5">•</span>
+                <span className="leading-relaxed text-[#e6edf3]">{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* 3. Kosakata Penting (Key Vocabulary) */}
+        {currentMeta.vocabulary && currentMeta.vocabulary.length > 0 && (
+          <div className="p-6 rounded-2xl bg-[#161b22] border border-[#30363d] space-y-4">
+            <div className="flex items-center gap-2 border-b border-[#30363d] pb-3">
+              <span className="text-lg">📖</span>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[#fbbf24]">
+                Kosakata Kunci & Frasa Penting
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {currentMeta.vocabulary.map((v, index) => (
+                <div
+                  key={index}
+                  className="p-3.5 rounded-xl bg-[#0d1117] border border-[#30363d] space-y-1.5"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-sm text-[#2dd4bf] tracking-wide">
+                      {v.word}
+                    </span>
+                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#21262d] text-[#8b949e] border border-[#30363d]">
+                      {v.partOfSpeech}
+                    </span>
+                  </div>
+                  <div className="text-xs text-[#e6edf3] font-medium">{v.meaning}</div>
+                  <div className="text-[11px] text-[#8b949e] italic leading-relaxed pt-1 border-t border-[#21262d]">
+                    "{v.example}"
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 4. Download PDF Modul */}
         {chapterNumber >= 2 && currentMeta.pdfUrl && (
           <div className="p-4 rounded-xl bg-[#161b22] border border-[#30363d] flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -102,14 +321,14 @@ export default async function ChapterPage({ params }: { params: Promise<{ id: st
             <a
               href={currentMeta.pdfUrl}
               download
-              className="px-4 py-2 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] text-[#2dd4bf] text-xs font-bold rounded-xl transition-all"
+              className="px-4 py-2 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] text-[#2dd4bf] text-xs font-bold rounded-xl transition-all hover:scale-105 active:scale-95"
             >
               Unduh PDF ⬇
             </a>
           </div>
         )}
 
-        {/* Area Interaksi */}
+        {/* 5. Area Evaluasi */}
         {chapterNumber === 1 ? (
           <Chapter1Action isCompleted={progress?.is_completed || false} />
         ) : (
@@ -120,7 +339,6 @@ export default async function ChapterPage({ params }: { params: Promise<{ id: st
             isCompleted={progress?.is_completed || false}
           />
         )}
-
       </div>
     </div>
   )
