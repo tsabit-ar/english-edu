@@ -5,11 +5,11 @@ import { logout } from '@/app/actions/auth'
 
 // Metadata 5 BAB Pembelajaran
 const CHAPTER_INFO = [
-  { id: 1, title: 'Overview & Dasar Pembelajaran', icon: '🔤', desc: 'Tonton video gambaran materi untuk membuka bab selanjutnya.' },
-  { id: 2, title: 'Struktur Kalimat & Pola Dasar', icon: '🔵', desc: 'Materi inti & kuis pilihan ganda (minimal 70% benar).' },
-  { id: 3, title: 'Kosakata Kontekstual & Frasa', icon: '🧩', desc: 'Materi pendalaman kata & kuis pemahaman.' },
-  { id: 4, title: 'Listening & Analisis Percakapan', icon: '🎧', desc: 'Latihan menyimak audio & pengujian pemahaman.' },
-  { id: 5, title: 'Praktek Lanjutan & Evaluasi', icon: '🏆', desc: 'Kuis komprehensif penutup seluruh modul.' },
+  { id: 1, title: 'Overview & Dasar Pembelajaran', icon: '🔤', desc: 'Tonton video pengantar untuk membuka akses bab materi.' },
+  { id: 2, title: 'Struktur Kalimat & Pola Dasar', icon: '🔵', desc: 'Materi 2 balok wajib (Pelaku + Aksi) & kuis dasar.' },
+  { id: 3, title: 'Pola S-V-O & Jurus Si Penyendiri', icon: '🧩', desc: 'Merangkai subjek-aksi-objek & aturan akhiran -s/-es.' },
+  { id: 4, title: 'Seni Bertanya & Menyangkal (Do & Does)', icon: '❓', desc: 'Aturan kalimat tanya, pencuri S, dan kalimat negatif.' },
+  { id: 5, title: 'Rahasia Jembatan Sakti (To Be)', icon: '🏆', desc: 'Kaidah to be (am/is/are) untuk sifat, profesi, dan lokasi.' },
 ]
 
 export default async function DashboardPage() {

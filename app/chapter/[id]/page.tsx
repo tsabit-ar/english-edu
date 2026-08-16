@@ -119,8 +119,130 @@ const CHAPTER_METADATA: {
     pdfUrl: '/materials/modul-bab-2.pdf',
   },
   3: {
+    title: 'Merangkai Kalimat S-V-O & Jurus Si Penyendiri',
+    videoId: '6qYj3fgiYA4', // Ganti dengan ID YouTube BAB 3 Anda
+    summary: [
+      'Rumus Utama Pola Lurus S-V-O: Urutan kalimat aksi bahasa Inggris sama persis dengan bahasa Indonesia: Subjek + Verb + Objek (Contoh: I drink coffee, We need money, They eat rice).',
+      'Kelompok Biasa / Rame-rame (I, You, We, They): Kata kerja tetap polos tanpa tambahan huruf akhiran (Contoh: They work, We eat, I want).',
+      'Geng Si Penyendiri (He, She, It): Karena sendirian, kata kerja wajib ditambah akhiran -s atau -es (Contoh: He works, She goes, It eats, She needs water).',
+      'Refleks Kalimat Kontras: Biasakan membedakan subjek secara refleks: "I want coffee, but he wants tea."',
+    ],
+    vocabulary: [
+      {
+        word: 'I / You / We / They',
+        partOfSpeech: 'Subjek',
+        meaning: 'Saya / Kamu / Kita / Mereka',
+        example: 'Geng biasa: kata kerja tetap bentuk dasar (They eat rice).',
+      },
+      {
+        word: 'He / She / It',
+        partOfSpeech: 'Subjek',
+        meaning: 'Dia (laki-laki) / Dia (perempuan) / Benda-Hewan',
+        example: 'Geng penyendiri: kata kerja wajib ditambah -s / -es (He works).',
+      },
+      {
+        word: 'Drink / Drinks',
+        partOfSpeech: 'Kata Kerja',
+        meaning: 'Minum',
+        example: 'I drink coffee vs He drinks tea.',
+      },
+      {
+        word: 'Eat / Eats',
+        partOfSpeech: 'Kata Kerja',
+        meaning: 'Makan',
+        example: 'They eat rice vs She eats bread.',
+      },
+      {
+        word: 'Need / Needs',
+        partOfSpeech: 'Kata Kerja',
+        meaning: 'Butuh (Kebutuhan)',
+        example: 'We need money vs He needs water.',
+      },
+      {
+        word: 'Want / Wants',
+        partOfSpeech: 'Kata Kerja',
+        meaning: 'Ingin / Mau',
+        example: 'You want coffee vs She wants water.',
+      },
+      {
+        word: 'Work / Works',
+        partOfSpeech: 'Kata Kerja',
+        meaning: 'Bekerja',
+        example: 'They work today vs He works today.',
+      },
+      {
+        word: 'Go / Goes',
+        partOfSpeech: 'Kata Kerja',
+        meaning: 'Pergi',
+        example: 'We go now vs She goes now.',
+      },
+      {
+        word: 'Coffee / Tea / Water',
+        partOfSpeech: 'Objek',
+        meaning: 'Kopi / Teh / Air',
+        example: 'Objek minuman sehari-hari.',
+      },
+      {
+        word: 'Rice / Money',
+        partOfSpeech: 'Objek',
+        meaning: 'Nasi / Uang',
+        example: 'Objek makanan dan kebutuhan.',
+      },
+    ],
+    pdfUrl: '/materials/modul-bab-3.pdf',
+  },
+  4: {
+    title: 'Seni Bertanya & Menyangkal (Do & Does)',
+    videoId: 'z0KFseiQrCU', // Ganti dengan ID video YouTube BAB 4 Anda nanti
+    summary: [
+      'Pasangan Kunci Tanya: "Do" untuk geng ramai (I, You, We, They) dan "Does" untuk geng penyendiri (He, She, It). Rumus: Do/Does + Subjek + Kata Kerja Polos?',
+      'Aturan Si Pencuri S: Saat "Does" masuk ke kalimat tanya, akhiran -s pada kata kerja hilang dicuri dan kembali ke bentuk dasar polos (Contoh: "Does she work here?", bukan "works").',
+      'Cara Menyangkal (Kalimat Negatif): Tambahkan "not" setelah kata bantu -> Don\'t (Do not) untuk geng ramai, Doesn\'t (Does not) untuk geng penyendiri.',
+      'Hukum 1 Huruf S: Dalam satu kalimat subjek penyendiri, huruf -s hanya boleh ada pada kata "Does/Doesn\'t". Dilarang dobel -s pada kata kerja (Contoh: "He doesn\'t like spicy food").',
+    ],
+    vocabulary: [
+      {
+        word: 'Do / Does',
+        partOfSpeech: 'Kata Bantu',
+        meaning: 'Apakah (Pembuka kalimat tanya)',
+        example: 'Do you speak English? | Does she work here?',
+      },
+      {
+        word: "Don't / Doesn't",
+        partOfSpeech: 'Negatif',
+        meaning: 'Tidak / Bukan (Penyangkalan)',
+        example: "I don't know | He doesn't like spicy food.",
+      },
+      {
+        word: 'Speak / Know',
+        partOfSpeech: 'Kata Kerja',
+        meaning: 'Berbicara (Bahasa) / Tahu (Mengerti)',
+        example: "Do they speak English? | I don't know.",
+      },
+      {
+        word: 'Like / Sleep',
+        partOfSpeech: 'Kata Kerja',
+        meaning: 'Suka (Gemar) / Tidur',
+        example: "She doesn't like tea | Do they sleep early?",
+      },
+      {
+        word: 'Here / All day',
+        partOfSpeech: 'Keterangan',
+        meaning: 'Di sini (Tempat) / Sepanjang hari (Waktu)',
+        example: "Does he work here? | We sleep all day.",
+      },
+      {
+        word: 'Spicy food',
+        partOfSpeech: 'Objek',
+        meaning: 'Makanan pedas',
+        example: "He doesn't eat spicy food.",
+      },
+    ],
+    pdfUrl: '/materials/modul-bab-4.pdf',
+  },
+  5: {
     title: 'Rahasia Jembatan Sakti (To Be)',
-    videoId: 'aZQKNmu7Bfc', // Ganti dengan ID video YouTube BAB 3 Anda nanti
+    videoId: 'aZQKNmu7Bfc', // Ganti dengan ID YouTube BAB 5 Anda
     summary: [
       'Rumus Utama Jembatan Sakti: Subjek (Pelaku) + To Be (am/is/are) + Deskripsi (Sifat / Profesi / Lokasi).',
       'Aturan Emas: Jika ada aksi fisik (eat, work) JANGAN pakai to be ("I work today"). Jika tidak ada aksi fisik WAJIB pakai to be ("I am happy today").',
@@ -147,12 +269,6 @@ const CHAPTER_METADATA: {
         example: 'We are hungry | He is tired after work.',
       },
       {
-        word: 'Smart / Tall',
-        partOfSpeech: 'Sifat',
-        meaning: 'Pintar (Cerdas) / Tinggi (Fisik)',
-        example: 'She is a smart teacher | They are tall.',
-      },
-      {
         word: 'Doctor / Teacher / Pilot',
         partOfSpeech: 'Profesi',
         meaning: 'Dokter / Guru / Pilot',
@@ -169,66 +285,6 @@ const CHAPTER_METADATA: {
         partOfSpeech: 'Lokasi',
         meaning: 'Di taman / Di atas meja',
         example: 'We are in the park | It is on the table.',
-      },
-    ],
-    pdfUrl: '/materials/modul-bab-3.pdf',
-  },
-  4: {
-    title: 'Listening & Analisis Percakapan',
-    videoId: 'dQw4w9WgXcQ',
-    summary: [
-      'Strategi mendengarkan kata kunci (key content words) dalam audio percakapan.',
-      'Membedakan aksen, linking sounds, dan intonasi pertanyaan.',
-      'Teknik mencatat poin penting secara cepat saat audio diputar.',
-    ],
-    vocabulary: [
-      {
-        word: 'Intonation',
-        partOfSpeech: 'n.',
-        meaning: 'Intonasi / naik turunnya nada bicara',
-        example: 'A rising intonation often indicates a yes/no question.',
-      },
-      {
-        word: 'Liaison',
-        partOfSpeech: 'n.',
-        meaning: 'Penyambungan bunyi akhir kata ke awal kata berikutnya',
-        example: 'Liaison makes spoken English flow continuously.',
-      },
-      {
-        word: 'Gist',
-        partOfSpeech: 'n.',
-        meaning: 'Pokok gagasan / inti keseluruhan cerita',
-        example: 'Listen for the general gist before focusing on tiny details.',
-      },
-    ],
-    pdfUrl: '/materials/modul-bab-4.pdf',
-  },
-  5: {
-    title: 'Praktek Lanjutan & Evaluasi',
-    videoId: 'dQw4w9WgXcQ',
-    summary: [
-      'Integrasi seluruh konsep struktur, kosakata, dan pemahaman listening.',
-      'Analisis pola kesalahan yang paling sering terjadi pada evaluasi akhir.',
-      'Langkah tindak lanjut pemanfaatan AI untuk latihan kuis mandiri.',
-    ],
-    vocabulary: [
-      {
-        word: 'Comprehensive',
-        partOfSpeech: 'adj.',
-        meaning: 'Menyeluruh / mencakup semua aspek',
-        example: 'This test provides a comprehensive evaluation of your skills.',
-      },
-      {
-        word: 'Fluency',
-        partOfSpeech: 'n.',
-        meaning: 'Kelancaran dan kefasihan berbahasa',
-        example: 'Consistent practice develops natural fluency over time.',
-      },
-      {
-        word: 'Synthesis',
-        partOfSpeech: 'n.',
-        meaning: 'Penggabungan berbagai elemen menjadi satu kesatuan',
-        example: 'The final project requires the synthesis of all previous chapters.',
       },
     ],
     pdfUrl: '/materials/modul-bab-5.pdf',
