@@ -120,7 +120,7 @@ const CHAPTER_METADATA: {
   },
   3: {
     title: 'Rahasia Jembatan Sakti (To Be)',
-    videoId: 'dQw4w9WgXcQ', // Ganti dengan ID video YouTube BAB 3 Anda nanti
+    videoId: 'aZQKNmu7Bfc', // Ganti dengan ID video YouTube BAB 3 Anda nanti
     summary: [
       'Rumus Utama Jembatan Sakti: Subjek (Pelaku) + To Be (am/is/are) + Deskripsi (Sifat / Profesi / Lokasi).',
       'Aturan Emas: Jika ada aksi fisik (eat, work) JANGAN pakai to be ("I work today"). Jika tidak ada aksi fisik WAJIB pakai to be ("I am happy today").',
