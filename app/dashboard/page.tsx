@@ -3,7 +3,6 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { logout } from '@/app/actions/auth'
 
-// Metadata 5 BAB Pembelajaran
 const CHAPTER_INFO = [
   { id: 1, title: 'Overview & Dasar Pembelajaran', icon: '🔤', desc: 'Tonton video pengantar untuk membuka akses bab materi.' },
   { id: 2, title: 'Struktur Kalimat & Pola Dasar', icon: '🔵', desc: 'Materi 2 balok wajib (Pelaku + Aksi) & kuis dasar.' },
@@ -27,8 +26,8 @@ export default async function DashboardPage() {
     .eq('id_user', user.id)
     .order('chapter_number', { ascending: true })
 
-  // Mapping progres ke array agar mudah diakses
   const progressMap = new Map(progressData?.map((p) => [p.chapter_number, p]))
+  const isCh4Completed = progressMap.get(4)?.is_completed ?? false
 
   return (
     <div className="min-h-screen bg-[#0d1117] text-[#e6edf3] p-6 lg:p-10">
@@ -47,13 +46,23 @@ export default async function DashboardPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/resources"
-              className="px-4 py-2 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] text-sm font-semibold rounded-xl transition-all flex items-center gap-2"
-            >
-              <span>📦</span>
-              <span>Gudang Soal & AI</span>
-            </Link>
+            {isCh4Completed ? (
+              <Link
+                href="/resources"
+                className="px-4 py-2 bg-[#21262d] hover:bg-[#30363d] border border-[#fbbf24]/40 text-sm font-semibold rounded-xl transition-all flex items-center gap-2 text-[#fbbf24]"
+              >
+                <span>📦</span>
+                <span>Gudang Soal & AI</span>
+              </Link>
+            ) : (
+              <div
+                className="px-4 py-2 bg-[#161b22] border border-[#30363d]/50 text-xs font-semibold rounded-xl text-[#8b949e] opacity-60 flex items-center gap-2 cursor-not-allowed select-none"
+                title="Selesaikan BAB 4 untuk membuka"
+              >
+                <span>🔒</span>
+                <span>Gudang Soal (Selesaikan BAB 4)</span>
+              </div>
+            )}
 
             <form action={logout}>
               <button
@@ -66,13 +75,13 @@ export default async function DashboardPage() {
           </div>
         </header>
 
-        {/* Informasi Aturan Pembelajaran */}
+        {/* Aturan Pembelajaran */}
         <div className="p-4 rounded-2xl bg-[#161b22] border border-[#30363d] flex items-start gap-3">
           <span className="text-xl">ℹ️</span>
           <div className="text-xs lg:text-sm text-[#8b949e] leading-relaxed">
-            <strong className="text-[#e6edf3]">Aturan Pembelajaran:</strong> Selesaikan BAB 1 dengan menonton video pengantar. 
-            Mulai BAB 2 dan seterusnya, Anda wajib menyelesaikan kuis dengan nilai 
-            <strong className="text-[#fbbf24]"> minimal 70% benar</strong> untuk membuka akses ke bab selanjutnya.
+            <strong className="text-[#e6edf3]">Aturan Pembelajaran:</strong> Kerjakan kuis dengan skor 
+            <strong className="text-[#fbbf24]"> minimal 70% benar</strong> untuk membuka bab selanjutnya. 
+            Modul bonus <strong>Gudang Soal & Tutorial AI</strong> akan terbuka otomatis setelah Anda menuntaskan <strong className="text-[#2dd4bf]">BAB 4</strong>.
           </div>
         </div>
 
@@ -90,7 +99,6 @@ export default async function DashboardPage() {
               const score = p?.quiz_highest_score ?? 0
 
               if (!isUnlocked) {
-                // Tampilan Kartu Terkunci
                 return (
                   <div
                     key={ch.id}
@@ -115,7 +123,6 @@ export default async function DashboardPage() {
                 )
               }
 
-              // Tampilan Kartu Terbuka / Selesai
               return (
                 <Link
                   key={ch.id}
@@ -152,31 +159,53 @@ export default async function DashboardPage() {
               )
             })}
 
-            {/* Kartu Gudang Soal & AI NotebookLM */}
-            <Link
-              href="/resources"
-              className="group p-5 rounded-2xl bg-gradient-to-br from-[#161b22] to-[#21262d] border border-[#fbbf24]/30 hover:border-[#fbbf24] transition-all flex flex-col justify-between shadow-lg hover:shadow-2xl"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-2xl group-hover:scale-110 transition-transform">📦</span>
-                  <span className="px-2.5 py-1 text-xs font-bold rounded-lg bg-[#fbbf24]/10 text-[#fbbf24] border border-[#fbbf24]/30">
-                    Spesial
-                  </span>
+            {/* Kartu Gudang Soal & AI (Terkunci jika BAB 4 belum tuntas) */}
+            {!isCh4Completed ? (
+              <div className="p-5 rounded-2xl bg-[#161b22]/50 border border-[#30363d]/50 opacity-60 flex flex-col justify-between select-none">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-2xl grayscale">📦</span>
+                    <span className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-[#21262d] text-[#8b949e] border border-[#30363d]">
+                      🔒 Terkunci
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-base text-[#8b949e]">
+                    Gudang Soal & Tutorial AI
+                  </h3>
+                  <p className="text-xs text-[#8b949e]/80 mt-2 leading-relaxed">
+                    Unduh bank soal komprehensif dan tonton tutorial peracikan kuis instan berbasis NotebookLM.
+                  </p>
                 </div>
-                <h3 className="font-bold text-base text-[#e6edf3] group-hover:text-[#fbbf24] transition-colors">
-                  Gudang Soal & Tutorial AI
-                </h3>
-                <p className="text-xs text-[#8b949e] mt-2 leading-relaxed">
-                  Unduh kumpulan bank soal PDF dan tonton video tutorial pembuatan kuis otomatis menggunakan NotebookLM.
-                </p>
+                <div className="mt-5 text-xs text-[#8b949e] italic">
+                  Selesaikan BAB 4 terlebih dahulu untuk membuka akses
+                </div>
               </div>
+            ) : (
+              <Link
+                href="/resources"
+                className="group p-5 rounded-2xl bg-gradient-to-br from-[#161b22] to-[#21262d] border border-[#fbbf24]/50 hover:border-[#fbbf24] transition-all flex flex-col justify-between shadow-lg hover:shadow-2xl"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-2xl group-hover:scale-110 transition-transform">📦</span>
+                    <span className="px-2.5 py-1 text-xs font-bold rounded-lg bg-[#fbbf24]/10 text-[#fbbf24] border border-[#fbbf24]/30">
+                      Terbuka
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-base text-[#e6edf3] group-hover:text-[#fbbf24] transition-colors">
+                    Gudang Soal & Tutorial AI
+                  </h3>
+                  <p className="text-xs text-[#8b949e] mt-2 leading-relaxed">
+                    Unduh bank soal komprehensif dan tonton tutorial peracikan kuis instan berbasis NotebookLM.
+                  </p>
+                </div>
 
-              <div className="mt-5 pt-4 border-t border-[#30363d]/50 flex items-center justify-between text-xs font-semibold text-[#fbbf24]">
-                <span>Buka Gudang Soal</span>
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </div>
-            </Link>
+                <div className="mt-5 pt-4 border-t border-[#30363d]/50 flex items-center justify-between text-xs font-semibold text-[#fbbf24]">
+                  <span>Buka Gudang Soal</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </Link>
+            )}
           </div>
         </section>
 

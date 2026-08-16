@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react'
 import { submitChapterQuiz } from '@/app/actions/learning'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 interface Exercise {
   id_exercise: number
@@ -61,6 +62,7 @@ export default function QuizSection({
   }
 
   const isAllAnswered = exercises.every((ex) => answers[ex.id_exercise])
+  const canProceed = result?.isPassed || isCompleted
 
   return (
     <div className="mt-8 p-6 lg:p-8 rounded-2xl bg-[#161b22] border border-[#30363d] space-y-6">
@@ -128,6 +130,29 @@ export default function QuizSection({
           {isPending ? 'Memvalidasi Jawaban...' : 'Kirim Jawaban Kuis →'}
         </button>
       </form>
+
+      {/* Tombol Lanjut ke Bab Berikutnya (Muncul Saat Lolos) */}
+      {canProceed && (
+        <div className="pt-4 border-t border-[#30363d] animate-fadeUp">
+          {chapterId < 5 ? (
+            <Link
+              href={`/chapter/${chapterId + 1}`}
+              className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-400 text-[#0d1117] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-emerald-500/20"
+            >
+              <span>Lanjut Belajar ke BAB {chapterId + 1}</span>
+              <span>→</span>
+            </Link>
+          ) : (
+            <Link
+              href="/dashboard"
+              className="w-full py-3.5 bg-gradient-to-r from-[#2dd4bf] to-[#fbbf24] hover:opacity-90 text-[#0d1117] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow-lg"
+            >
+              <span>🏆 Selamat! Anda Menyelesaikan Seluruh Modul (Kembali ke Dashboard)</span>
+              <span>→</span>
+            </Link>
+          )}
+        </div>
+      )}
     </div>
   )
 }
