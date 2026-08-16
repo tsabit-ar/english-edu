@@ -1,6 +1,28 @@
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import CopyPromptButton from './CopyPromptButton'
+
+// Contoh data bank soal PDF (bisa ditambah sesuai kebutuhan)
+const QUESTION_BANKS = [
+  {
+    title: 'Bank Soal Komprehensif (Grammar & Structure)',
+    desc: 'Kumpulan 50+ variasi soal pilihan ganda dari BAB 1 sampai BAB 4 beserta kunci jawaban.',
+    fileUrl: '/materials/bank-soal-komprehensif.pdf',
+    tag: 'PDF Lengkap',
+  },
+  {
+    title: 'Cheat Sheet Pola Rumus & Kunci S-V-O',
+    desc: 'Lembar contekan praktis ringkasan rumus kata kerja dasar, do/does, dan to be dalam 1 halaman.',
+    fileUrl: '/materials/cheat-sheet-rumus.pdf',
+    tag: 'Ringkasan Cepat',
+  },
+]
+
+const NOTEBOOK_LM_PROMPT = `Berdasarkan dokumen modul pembelajaran bahasa Inggris yang saya unggah:
+1. Buatkan 5 soal pilihan ganda (A, B, C, D) yang menguji pemahaman konsep dasar (bukan sekadar hafalan).
+2. Fokuskan soal pada materi: Pola S-V-O, aturan Si Penyendiri (akhiran -s/-es), dan penggunaan Do/Does.
+3. Cantumkan Kunci Jawaban dan Pembahasan Logis singkat di bawah setiap butir soal.`
 
 export default async function ResourcesPage() {
   const supabase = await createClient()
@@ -12,7 +34,7 @@ export default async function ResourcesPage() {
     redirect('/login')
   }
 
-  // Verifikasi Hak Akses: Wajib sudah menyelesaikan BAB 4
+  // Validasi Hak Akses: Wajib lulus BAB 4
   const { data: ch4Progress } = await supabase
     .from('user_chapter_progress')
     .select('is_completed')
@@ -37,74 +59,128 @@ export default async function ResourcesPage() {
             ← Kembali ke Dashboard
           </Link>
           <span className="text-xs font-bold px-3 py-1 rounded-lg bg-[#fbbf24]/10 border border-[#fbbf24]/30 text-[#fbbf24]">
-            Modul Spesial Terbuka
+            📦 Modul Bonus Terbuka
           </span>
         </div>
 
-        {/* Header Modul */}
+        {/* Header Section */}
         <div className="space-y-2">
           <div className="flex items-center gap-3">
-            <span className="text-3xl">📦</span>
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2dd4bf] to-[#fbbf24] flex items-center justify-center text-xl shadow-lg">
+              📦
+            </div>
             <h1 className="text-2xl lg:text-3xl font-bold font-serif text-white">
-              Gudang Soal & AI NotebookLM
+              Gudang Soal & Tutorial AI
             </h1>
           </div>
-          <p className="text-xs lg:text-sm text-[#8b949e]">
-            Pusat bank soal latihan mandiri dan panduan membuat kuis otomatis menggunakan Google NotebookLM.
+          <p className="text-xs lg:text-sm text-[#8b949e] leading-relaxed">
+            Pusat repositori soal latihan mandiri dan instruksi praktis memanfaatkan Google NotebookLM untuk menghasilkan kuis tanpa batas langsung dari modul bacaan Anda.
           </p>
         </div>
 
-        {/* 1. Video Tutorial Pembuatan Soal via NotebookLM */}
-        <div className="space-y-3">
-          <h2 className="text-sm font-bold tracking-wider text-[#fbbf24] uppercase">
-            1. Tutorial Generator Kuis AI (NotebookLM)
-          </h2>
+        {/* 1. Video Tutorial Generator Soal AI */}
+        <section className="space-y-3">
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-bold uppercase tracking-wider text-[#fbbf24] flex items-center gap-2">
+              <span>🎥</span>
+              <span>Tutorial Pembuatan Kuis Mandiri (NotebookLM)</span>
+            </h2>
+            <span className="text-xs text-[#8b949e]">Video Panduan</span>
+          </div>
+
           <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-[#161b22] border border-[#30363d] shadow-xl">
             <iframe
-              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" // Ganti dengan ID video tutorial NotebookLM Anda
-              title="Tutorial NotebookLM Kuis"
+              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" // Ganti dengan ID video tutorial Anda nanti
+              title="Tutorial NotebookLM"
               className="w-full h-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </div>
-        </div>
+        </section>
 
-        {/* 2. Prompt Template Siap Pakai untuk NotebookLM */}
-        <div className="p-6 rounded-2xl bg-[#161b22] border border-[#30363d] space-y-3">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-[#2dd4bf]">
-            Prompt Template NotebookLM (Copy-Paste)
-          </h3>
-          <p className="text-xs text-[#8b949e]">
-            Unggah modul PDF materi ke NotebookLM, lalu salin prompt berikut ke kolom percakapan:
-          </p>
-          <div className="p-4 rounded-xl bg-[#0d1117] border border-[#30363d] text-xs font-mono text-[#e6edf3] leading-relaxed select-all">
-            "Berdasarkan dokumen sumber yang saya unggah, buatkan 5 soal pilihan ganda bahasa Inggris (A, B, C, D) yang menguji pemahaman konsep tata bahasa tersebut. Cantumkan kunci jawaban dan penjelasan logis singkat di bagian akhir."
-          </div>
-        </div>
-
-        {/* 3. Unduh Bank Soal Tambahan */}
-        <div className="p-6 rounded-2xl bg-[#161b22] border border-[#30363d] space-y-4">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-[#fbbf24]">
-            2. Unduh Bank Soal Komprehensif (PDF)
-          </h3>
-          <div className="p-4 rounded-xl bg-[#0d1117] border border-[#30363d] flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">📚</span>
-              <div>
-                <div className="text-sm font-bold text-[#e6edf3]">Bank Soal Latihan Mandiri 50+ Butir</div>
-                <div className="text-xs text-[#8b949e]">Kompilasi soal grammar, structure, dan vocabulary lengkap</div>
-              </div>
+        {/* 2. Panduan Langkah & Salin Prompt */}
+        <section className="p-6 rounded-2xl bg-[#161b22] border border-[#30363d] space-y-5">
+          <div className="border-b border-[#30363d] pb-3 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-lg">🤖</span>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[#2dd4bf]">
+                Prompt Engineering untuk NotebookLM
+              </h3>
             </div>
-            <a
-              href="/materials/bank-soal-komprehensif.pdf"
-              download
-              className="px-4 py-2 bg-[#2dd4bf] hover:bg-[#14b8a6] text-[#0d1117] text-xs font-bold rounded-xl transition-all shadow-md active:scale-95"
-            >
-              Unduh PDF ⬇
-            </a>
+            <CopyPromptButton textToCopy={NOTEBOOK_LM_PROMPT} />
           </div>
-        </div>
+
+          {/* Workflow Steps */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div className="p-3.5 rounded-xl bg-[#0d1117] border border-[#30363d] space-y-1">
+              <div className="text-[#2dd4bf] font-bold">Langkah 1</div>
+              <div className="text-[#8b949e]">Buka situs <strong className="text-[#e6edf3]">notebooklm.google.com</strong> dan buat Notebook baru.</div>
+            </div>
+            <div className="p-3.5 rounded-xl bg-[#0d1117] border border-[#30363d] space-y-1">
+              <div className="text-[#2dd4bf] font-bold">Langkah 2</div>
+              <div className="text-[#8b949e]">Unggah file <strong className="text-[#e6edf3]">PDF Modul BAB</strong> yang telah Anda unduh dari web ini.</div>
+            </div>
+            <div className="p-3.5 rounded-xl bg-[#0d1117] border border-[#30363d] space-y-1">
+              <div className="text-[#2dd4bf] font-bold">Langkah 3</div>
+              <div className="text-[#8b949e]">Tempel prompt di bawah ke kolom chat untuk meracik kuis instan beserta penjelasannya.</div>
+            </div>
+          </div>
+
+          {/* Prompt Box */}
+          <div className="p-4 rounded-xl bg-[#0d1117] border border-[#30363d] relative">
+            <div className="text-[11px] uppercase tracking-wider text-[#8b949e] font-bold mb-2">
+              Teks Prompt:
+            </div>
+            <pre className="text-xs text-[#e6edf3] font-mono whitespace-pre-wrap leading-relaxed">
+              {NOTEBOOK_LM_PROMPT}
+            </pre>
+          </div>
+        </section>
+
+        {/* 3. Repositori Unduh Bank Soal PDF */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-bold uppercase tracking-wider text-[#fbbf24] flex items-center gap-2">
+              <span>📚</span>
+              <span>Bank Soal Tambahan & Lembar Materi</span>
+            </h2>
+            <span className="text-xs text-[#8b949e]">Unduhan Langsung</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {QUESTION_BANKS.map((item, idx) => (
+              <div
+                key={idx}
+                className="p-5 rounded-2xl bg-[#161b22] border border-[#30363d] flex flex-col justify-between space-y-4"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl">📄</span>
+                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#21262d] text-[#2dd4bf] border border-[#30363d]">
+                      {item.tag}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-sm text-[#e6edf3] leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-[#8b949e] leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+
+                <a
+                  href={item.fileUrl}
+                  download
+                  className="w-full py-2.5 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] text-[#2dd4bf] hover:text-[#e6edf3] text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95"
+                >
+                  <span>Unduh File PDF</span>
+                  <span>⬇</span>
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
 
       </div>
     </div>
