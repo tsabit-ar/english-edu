@@ -46,33 +46,26 @@ export default async function DashboardPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            {isCh4Completed ? (
-              <Link
-                href="/resources"
-                className="px-4 py-2 bg-[#21262d] hover:bg-[#30363d] border border-[#fbbf24]/40 text-sm font-semibold rounded-xl transition-all flex items-center gap-2 text-[#fbbf24]"
-              >
-                <span>📦</span>
-                <span>Gudang Soal & AI</span>
-              </Link>
-            ) : (
-              <div
-                className="px-4 py-2 bg-[#161b22] border border-[#30363d]/50 text-xs font-semibold rounded-xl text-[#8b949e] opacity-60 flex items-center gap-2 cursor-not-allowed select-none"
-                title="Selesaikan BAB 4 untuk membuka"
-              >
-                <span>🔒</span>
-                <span>Gudang Soal (Selesaikan BAB 4)</span>
-              </div>
-            )}
+  <a
+    href="https://lynk.id/noahproject1/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="px-4 py-2 bg-gradient-to-r from-[#2dd4bf]/20 to-[#fbbf24]/20 hover:from-[#2dd4bf]/30 hover:to-[#fbbf24]/30 border border-[#2dd4bf]/40 text-sm font-semibold rounded-xl text-[#e6edf3] transition-all flex items-center gap-2 active:scale-95 shadow-md"
+  >
+    <span>✨</span>
+    <span>Cek Layanan Lainnya!</span>
+    <span className="text-xs text-[#2dd4bf]">↗</span>
+  </a>
 
-            <form action={logout}>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 text-sm font-semibold rounded-xl transition-all"
-              >
-                Logout
-              </button>
-            </form>
-          </div>
+  <form action={logout}>
+    <button
+      type="submit"
+      className="px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 text-sm font-semibold rounded-xl transition-all"
+    >
+      Logout
+    </button>
+  </form>
+</div>
         </header>
 
         {/* Aturan Pembelajaran */}
